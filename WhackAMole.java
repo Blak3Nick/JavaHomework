@@ -14,13 +14,14 @@ public class WhackAMole {
 	boolean place(int x, int y)
 	{	
 		moleGrid[x][y] = 'M';
+		molesLeft += 1;
 		return true;
 	}
 	 void whack(int x, int y) {
 		if(moleGrid[x][y] == 'M') {
 			moleGrid[x][y] = 'W';
 			score += 1;
-			molesLeft = molesLeft + 1;
+			molesLeft = molesLeft - 1;
 		}else {
 			System.out.println("Miss...");
 		}
@@ -86,7 +87,7 @@ public class WhackAMole {
 		System.out.println("You have "+ moleGrid.attemptsLeft + " tries left to whack all the moles.");
 		printGridToUser(moleGrid.moleGrid);
 		System.out.println("Enter x y coordinates to make guesses. Input -1, -1 to end the game.");
-		while(attemptsLeft > 0 && molesLeft < 10) {
+		while(attemptsLeft > 0 && molesLeft > 0) {
 		System.out.println("Enter x coordinate first: ");
 		int x_guess = userInput.nextInt();
 		System.out.println("Enter y coordinate: ");
@@ -102,7 +103,7 @@ public class WhackAMole {
 		} 
 		}
 			System.out.println("The game is over");
-			if(molesLeft == 10) {
+			if(molesLeft == 0) {
 				System.out.println("You have won!");
 			}
 			else {
